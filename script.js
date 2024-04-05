@@ -4,22 +4,26 @@ const addEmployeesBtn = document.querySelector('#add-employees-btn');
 // Collect employee data
 const collectEmployees = function () {
 
-  const allEmployees = [];
-  let addAnother = true;
+  let employeeList = [];
 
-  while (addAnother) {
+  let choice = true;
+
+  while (choice) {
     let employee = {};
-    employee.firstName = prompt("Please enter first name:");
-    employee.lastName = prompt("Please enter last name:");
-    employee.salary = prompt("Please enter salary:");
+    employee.firstName = prompt("Please enter employee's first name:");
+
+    employee.lastName = prompt("Please enter employee's last name:");
+
+    employee.salary = prompt("Please enter employee's salary:");
+
     if (isNaN(employee.salary)) {
-      alert("Sorry salary is not a number");
+      alert("Error: Unknown amount");
       employee.salary = 0;
     }
-    allEmployees.push(employee);
-    addAnother = confirm("Would you like to add another employee?");
+    employeeList.push(employee);
+    choice = confirm("Add another employee?");
   }
-  return allEmployees;
+  return employeeList;
 }
 
 // Display the average salary
@@ -28,20 +32,22 @@ const displayAverageSalary = function (employeesArray) {
   totalSalary = 0;
   for (i = 0; i < employeesArray.length; i++) {
 
-    const currentEmployee = employeesArray[i];
+    let currentEmployee = employeesArray[i];
     totalSalary + - parseInt(currentEmployee.salary);
   }
   let averageSalary = totalSalary / employeesArray.length;
-  console.log(`Average salary is ${averageSalary}`);
+
+  console.log(`Their average salary is: ${averageSalary}`);
   console.log(`There are ${employeesArray.length} employees.`);
+
   return averageSalary;
 
 }
 
 // Select a random employee
-const getRandomEmployee = function (employeesArray) {
+let getRandomEmployee = function (employeesArray) {
   let randomEmployee = Math.floor(Math.random() * employeesArray.length);
-  console.log(`Congrats to ${employeesArray[randomEmployee].firstName} ${employeesArray[randomEmployee].lastName}!`);
+  console.log(`Congratulations! You have picked ${employeesArray[randomEmployee].firstName} ${employeesArray[randomEmployee].lastName}!`);
 }
 
 /*
